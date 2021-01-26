@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">ShoeStore</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="john_smith_gmail_com">john@gmail.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="shoe_list">SHOE LIST</string>
+    <string name="shoe_detail">SHOE DETAIL</string>
+    <string name="company">COMPANY</string>
+    <string name="shoe_name">SHOE NAME</string>
+    <string name="shoe_size">SHOE SIZE</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="logout">Logout</string>
+    <string name="welcome_to_yourshoes">Welcome to YourShoes!</string>
+    <string name="maintain_inventory">Your one stop shop for maintaing all your shoe Inventory!</string>
+    <string name="instructions">INSTRUCTIONS</string>
+    <string name="instructions_1">Please press the Shoe List Button below to navigate to the list of shoes</string>
+    <string name="instructions_2">You can then add a new shoe by clicking on add shoe on the shoe list screen</string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER</string>
+    <string name="Cancel">CANCEL</string>
+    <string name="Save">SAVE</string>
+    <string name="add_shoe">ADD SHOE</string>
+
+</resources>
