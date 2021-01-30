@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.udacity.shoestore.databinding.FragmentShoeDetailBinding
-import com.udacity.shoestore.databinding.FragmentShoeListBinding
+//import com.udacity.shoestore.databinding.FragmentShoeListBinding
 import com.udacity.shoestore.databinding.FragmentWelcomeBinding
 import com.udacity.shoestore.models.Shoe
 import kotlinx.android.synthetic.main.fragment_shoe_detail.*
@@ -56,12 +56,18 @@ class ShoeDetailFragment : Fragment() {
             sdbinding.setLifecycleOwner(activity)
         }
         sdbinding.btnSave.setOnClickListener {
+            var shoe: Shoe = Shoe(editShoeName.text.toString(),editShoeSize.text.toString().toDouble(),editShoeCompany.text.toString(), editShoeDescription.text.toString())
+            /*shoe.name = editShoeName.text.toString()
+            shoe.size = editShoeSize.text.toString().toDouble()
+            shoe.company = editShoeCompany.text.toString()
+            shoe.description = editShoeCompany.text.toString()*/
+
             viewModel.shoe.name = editShoeName.text.toString()
             viewModel.shoe.size = editShoeSize.text.toString().toDouble()
             viewModel.shoe.company = editShoeCompany.text.toString()
             viewModel.shoe.description = editShoeDescription.text.toString()
 
-            viewModel.addToList()
+            viewModel.addToList(shoe)
             Timber.i("View Model now is :" + viewModel.shoeList.value)
             //Navigation not working
             Navigation.createNavigateOnClickListener(R.id.action_shoeDetailFragment_to_shoesListFragment)

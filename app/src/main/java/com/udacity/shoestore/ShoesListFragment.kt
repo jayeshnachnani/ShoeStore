@@ -13,9 +13,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import com.google.common.primitives.Ints.indexOf
-import com.udacity.shoestore.databinding.FragmentShoeListBinding
+//import com.udacity.shoestore.databinding.FragmentShoeListBinding
 import com.udacity.shoestore.databinding.FragmentShoesListBinding
 import com.udacity.shoestore.models.Shoe
+import kotlinx.android.synthetic.main.fragment_shoes_list.*
 import timber.log.Timber
 
 // TODO: Rename parameter arguments, choose names that match
@@ -60,10 +61,35 @@ class ShoesListFragment : Fragment() {
         binding.listLinearLayout.addView(txtView2)*/
 
         viewModel.shoeList.observe(this.viewLifecycleOwner, Observer { newShoeList -> run{
-            val txtView: TextView = TextView(this.context)
+            viewModel.shoeList.value?.forEach{
+            var txtShoeName: TextView = TextView(this.context)
+                txtShoeName.text = "Shoe Name: " + it.name.toString()
+                txtShoeName.setTextSize(20.0F)
+            binding.listLinearLayout.addView(txtShoeName)
+                var txtShoeDescription: TextView = TextView(this.context)
+                txtShoeDescription.text = "Shoe Description: " + it.description.toString()
+                txtShoeDescription.setTextSize(20.0F)
+                binding.listLinearLayout.addView(txtShoeDescription)
+                var txtShoeSize: TextView = TextView(this.context)
+                txtShoeSize.text = "Shoe Size: "+ it.size.toString()
+                txtShoeSize.setTextSize(20.0F)
+                binding.listLinearLayout.addView(txtShoeSize)
+                var txtShoeCompany: TextView = TextView(this.context)
+                txtShoeCompany.text = "Shoe Company: " + it.company.toString()
+                txtShoeCompany.setTextSize(20.0F)
+                binding.listLinearLayout.addView(txtShoeCompany)
+                var txtSpace: TextView = TextView(this.context)
+                txtSpace.text = " "
+                txtSpace.setTextSize(20.0F)
+                binding.listLinearLayout.addView(txtSpace)
+
+
+
+        }
+            /*var txtView: TextView = TextView(this.context)
             txtView.text = viewModel.shoeList.value.toString()
             txtView.setTextSize(50.0F)
-            binding.listLinearLayout.addView(txtView)
+            binding.listLinearLayout.addView(txtView)*/
         }
         })
 

@@ -30,10 +30,10 @@ class ShoeViewModel : ViewModel(){
         _shoeList.value = _list
     }
 
-    fun addToList() {
+    fun addToList(newshoe:Shoe) {
         //_list.add(Shoe("i23",12.0,"bata", "images"))
        // Timber.i("shoe now is" + shoe.toString())
-        _list.add(shoe)
+        _list.add(newshoe)
         Timber.i("list now is:" )
          _list.forEach{Timber.i(it.name.toString() + "\n")}
         _shoeList.value = _list

@@ -2,6 +2,7 @@ package com.udacity.shoestore
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.databinding.DataBinderMapper
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -10,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.udacity.shoestore.databinding.ActivityMainBinding
-import com.udacity.shoestore.databinding.FragmentShoeListBinding
+//import com.udacity.shoestore.databinding.FragmentShoeListBinding
 import kotlinx.android.synthetic.main.activity_main.view.*
 import timber.log.Timber
 
@@ -33,6 +34,12 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, navController)
         Timber.plant(Timber.DebugTree())
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //if(item.getitemId() -- R.id.Logout)
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {

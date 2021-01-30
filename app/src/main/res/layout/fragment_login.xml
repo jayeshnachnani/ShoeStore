@@ -2,6 +2,8 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--Using constraint layout here since it is easy to set relative constraints for views.
+    Also for nested views Linear Layouts tend to be inefficient !-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -10,13 +12,15 @@
             android:id="@+id/textEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/email"
-            android:textAlignment="textStart"
-            android:textSize="24sp"
 
+            android:labelFor="@id/editTextEmail"
+            android:text="@string/email"
+
+
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/editTextEmail"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="@+id/editTextEmail"
+            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5" />
@@ -25,12 +29,13 @@
             android:id="@+id/textPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:labelFor="@id/editTextTextPassword"
             android:text="@string/password"
-            android:textAlignment="textStart"
+
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/editTextTextPassword"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.6" />
@@ -41,29 +46,23 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName|textEmailAddress"
-            android:text="@string/john_smith_gmail_com"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/textEmail"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.7"
+            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintTop_toTopOf="@+id/textEmail" />
 
         <EditText
             android:id="@+id/editTextTextPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:ems="10"
             android:inputType="textPassword"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/editTextEmail"
-            app:layout_constraintHorizontal_bias="0.7"
+            app:layout_constraintBottom_toBottomOf="@+id/textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.6" />
+            app:layout_constraintTop_toTopOf="@+id/textPassword" />
 
         <Button
             android:id="@+id/btn_Register"

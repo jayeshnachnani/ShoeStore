@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ShoesListFragment">
-
+    <!--Using linear layout with scrollView since there are no nested elements in this layout
+     The views are generated programatically and are at the same level!-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
