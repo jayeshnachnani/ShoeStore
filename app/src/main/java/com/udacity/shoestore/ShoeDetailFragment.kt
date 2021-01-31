@@ -2,14 +2,16 @@ package com.udacity.shoestore
 
 import android.app.Activity
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.InverseMethod
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.udacity.shoestore.databinding.FragmentShoeDetailBinding
 //import com.udacity.shoestore.databinding.FragmentShoeListBinding
 import com.udacity.shoestore.databinding.FragmentWelcomeBinding
@@ -55,31 +57,52 @@ class ShoeDetailFragment : Fragment() {
         if (activity != null && isAdded()) {
             sdbinding.setLifecycleOwner(activity)
         }
+
+
         sdbinding.btnSave.setOnClickListener {
-            var shoe: Shoe = Shoe(editShoeName.text.toString(),editShoeSize.text.toString().toDouble(),editShoeCompany.text.toString(), editShoeDescription.text.toString())
-            /*shoe.name = editShoeName.text.toString()
+            if (sdbinding.editShoeName.getText().toString().trim().equals("")) {
+                sdbinding.editShoeName.setError("This Field cannot be blank")
+            } else if (sdbinding.editShoeSize.getText().toString().trim().equals("")) {
+                sdbinding.editShoeSize.setError("This Field cannot be blank")
+            } else if (sdbinding.editShoeCompany.getText().toString().trim().equals("")) {
+                sdbinding.editShoeCompany.setError("This Field cannot be blank")
+            } else if (sdbinding.editShoeDescription.getText().toString().trim().equals("")) {
+                sdbinding.editShoeDescription.setError("This Field cannot be blank")
+            } else {
+                var shoe: Shoe = Shoe(
+                    editShoeName.text.toString(),
+                    editShoeSize.text.toString().toDouble(),
+                    editShoeCompany.text.toString(),
+                    editShoeDescription.text.toString()
+                )
+                /*shoe.name = editShoeName.text.toString()
             shoe.size = editShoeSize.text.toString().toDouble()
             shoe.company = editShoeCompany.text.toString()
             shoe.description = editShoeCompany.text.toString()*/
 
-            viewModel.shoe.name = editShoeName.text.toString()
-            viewModel.shoe.size = editShoeSize.text.toString().toDouble()
-            viewModel.shoe.company = editShoeCompany.text.toString()
-            viewModel.shoe.description = editShoeDescription.text.toString()
+                viewModel.shoe.name = editShoeName.text.toString()
+                viewModel.shoe.size = editShoeSize.text.toString().toDouble()
+                viewModel.shoe.company = editShoeCompany.text.toString()
+                viewModel.shoe.description = editShoeDescription.text.toString()
 
-            viewModel.addToList(shoe)
-            Timber.i("View Model now is :" + viewModel.shoeList.value)
-            //Navigation not working
-            Navigation.createNavigateOnClickListener(R.id.action_shoeDetailFragment_to_shoesListFragment)
-
+                viewModel.addToList(shoe)
+                Timber.i("View Model now is :" + viewModel.shoeList.value)
+                //Navigation not working
+                //Navigation.createNavigateOnClickListener(R.id.action_shoeDetailFragment_to_shoesListFragment)
+                //this.findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoesListFragment())
+                this.findNavController().navigateUp()
+            }
+            //view.findNavController()
         }
         sdbinding.btnCancel.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_shoeDetailFragment_to_shoesListFragment)
         )
+
         return sdbinding.root
     }
 
-    companion object {
+
+    /*companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
@@ -97,7 +120,9 @@ class ShoeDetailFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
-    }
+    }*/
 }
+
+
 
 

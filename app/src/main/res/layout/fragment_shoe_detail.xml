@@ -9,7 +9,13 @@
         <variable
             name="shoeViewModel"
             type="com.udacity.shoestore.ShoeViewModel" />
+        <import type="com.udacity.shoestore.Converter"/>
+        <variable
+            name="shoe"
+            type="com.udacity.shoestore.models.Shoe" />
+
     </data>
+
     <!--Using constraint layout here since it is easy to set relative constraints for views.
     Also for nested views Linear Layouts tend to be inefficient !-->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -110,9 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="@{Double.toString(shoeViewModel.shoe.size)}"
-
-
+            android:text="@={Converter.doubleToString(shoe.size)}"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

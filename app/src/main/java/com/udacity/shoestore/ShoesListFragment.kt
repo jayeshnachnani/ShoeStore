@@ -2,16 +2,16 @@ package com.udacity.shoestore
 
 import android.databinding.tool.ext.S
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.google.common.primitives.Ints.indexOf
 //import com.udacity.shoestore.databinding.FragmentShoeListBinding
 import com.udacity.shoestore.databinding.FragmentShoesListBinding
@@ -49,8 +49,10 @@ class ShoesListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding: FragmentShoesListBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_shoes_list,container,false)
+        val binding: FragmentShoesListBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_shoes_list, container, false)
         Timber.i("Created boss!")
+        setHasOptionsMenu(true)
         //binding.lifecycleOwner = activity
         /*val txtView: TextView = TextView(this.context)
         txtView.text = "Try Adding me"
@@ -60,41 +62,42 @@ class ShoesListFragment : Fragment() {
         txtView.text = "Try Adding me tooo!!"
         binding.listLinearLayout.addView(txtView2)*/
 
-        viewModel.shoeList.observe(this.viewLifecycleOwner, Observer { newShoeList -> run{
-            viewModel.shoeList.value?.forEach{
-            var txtShoeName: TextView = TextView(this.context)
-                txtShoeName.text = "Shoe Name: " + it.name.toString()
-                txtShoeName.setTextSize(20.0F)
-            binding.listLinearLayout.addView(txtShoeName)
-                var txtShoeDescription: TextView = TextView(this.context)
-                txtShoeDescription.text = "Shoe Description: " + it.description.toString()
-                txtShoeDescription.setTextSize(20.0F)
-                binding.listLinearLayout.addView(txtShoeDescription)
-                var txtShoeSize: TextView = TextView(this.context)
-                txtShoeSize.text = "Shoe Size: "+ it.size.toString()
-                txtShoeSize.setTextSize(20.0F)
-                binding.listLinearLayout.addView(txtShoeSize)
-                var txtShoeCompany: TextView = TextView(this.context)
-                txtShoeCompany.text = "Shoe Company: " + it.company.toString()
-                txtShoeCompany.setTextSize(20.0F)
-                binding.listLinearLayout.addView(txtShoeCompany)
-                var txtSpace: TextView = TextView(this.context)
-                txtSpace.text = " "
-                txtSpace.setTextSize(20.0F)
-                binding.listLinearLayout.addView(txtSpace)
+        viewModel.shoeList.observe(this.viewLifecycleOwner, Observer { newShoeList ->
+            run {
+                viewModel.shoeList.value?.forEach {
+                    var txtShoeName: TextView = TextView(this.context)
+                    txtShoeName.text = "Shoe Name: " + it.name.toString()
+                    txtShoeName.setTextSize(20.0F)
+                    binding.listLinearLayout.addView(txtShoeName)
+                    var txtShoeDescription: TextView = TextView(this.context)
+                    txtShoeDescription.text = "Shoe Description: " + it.description.toString()
+                    txtShoeDescription.setTextSize(20.0F)
+                    binding.listLinearLayout.addView(txtShoeDescription)
+                    var txtShoeSize: TextView = TextView(this.context)
+                    txtShoeSize.text = "Shoe Size: " + it.size.toString()
+                    txtShoeSize.setTextSize(20.0F)
+                    binding.listLinearLayout.addView(txtShoeSize)
+                    var txtShoeCompany: TextView = TextView(this.context)
+                    txtShoeCompany.text = "Shoe Company: " + it.company.toString()
+                    txtShoeCompany.setTextSize(20.0F)
+                    binding.listLinearLayout.addView(txtShoeCompany)
+                    var txtSpace: TextView = TextView(this.context)
+                    txtSpace.text = " "
+                    txtSpace.setTextSize(20.0F)
+                    binding.listLinearLayout.addView(txtSpace)
 
 
-
-        }
-            /*var txtView: TextView = TextView(this.context)
-            txtView.text = viewModel.shoeList.value.toString()
-            txtView.setTextSize(50.0F)
-            binding.listLinearLayout.addView(txtView)*/
-        }
+                }
+                /*var txtView: TextView = TextView(this.context)
+                txtView.text = viewModel.shoeList.value.toString()
+                txtView.setTextSize(50.0F)
+                binding.listLinearLayout.addView(txtView)*/
+            }
         })
 
         binding.btnAddShoe.setOnClickListener(
-              Navigation.createNavigateOnClickListener(R.id.action_shoesListFragment_to_shoeDetailFragment))
+            Navigation.createNavigateOnClickListener(R.id.action_shoesListFragment_to_shoeDetailFragment)
+        )
 
         //binding.listLinearLayout
         return binding.root
@@ -107,6 +110,15 @@ class ShoesListFragment : Fragment() {
         Timber.i("Resumed boss!")
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.nav_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
+                || super.onOptionsItemSelected(item)
+    }
 
 
     companion object {
